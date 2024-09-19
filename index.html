@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate Width on Scrollimg</title>
+
+    <style>
+      html{
+        scroll-behavior: smooth;
+      }
+section{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+section:first-child{
+  background-color: #eee;
+}
+section:nth-child(2){
+  background-color: red;
+}
+section:nth-child(3){
+  background-color: #cccccc;
+}
+
+
+section:last-child{
+  background-color: aquamarine;
+}
+  .our-skills {
+
+  position: relative;
+  }
+
+  .our-skills .skills {
+    width: 550px;
+  }
+  .our-skills .skills .skill h3 {
+    color: #363434;
+    margin: 20px 0;
+  }
+  .our-skills .skills .skill .prog {
+    height: 30px;
+    background-color: #eee;
+    position: relative;
+  }
+  .our-skills .skills .skill .prog span {
+    height: 100%;
+    background-color: rgb(5, 102, 158);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.5s linear;
+ 
+  }
+  .our-skills .skills .skill .prog span::before {
+    content: attr(data-width);
+    top: -30px;
+    right: -14px;
+    position: absolute;
+    padding: 4px 7px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  .our-skills .skills .skill .prog span::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: -2px;
+    border: 4px solid;
+    border-color: #f1efef transparent transparent;
+  }
+
+  #up-btn{
+    position: fixed;
+    right: 54px;
+    bottom: 45px;
+    background-color: #0ef8bd;
+    color: rgb(0, 0, 0);
+    font-size: 33px;
+    border: navajowhite;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 2px 2px #00000096;
+    z-index: 10;
+    display: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  #up-btn:hover{
+    background-color: rgba(241, 238, 11, 0.705);
+  }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- button scroll up -->
+    <button id="up-btn">Up</button>
+    <!--end button scroll up -->
+    <section id="section-on">
+      Section One
+    </section>
+    <section id="section-two">
+      Section two
+    </section>
+
+    <section id="section-three">
+      <div class="our-skills" id="our-skills">
+        <h2 class="main-title">our skills</h2>
+        <div class="container">
+          <div class="skills">
+            <div class="skill">
+              <h3>HTML</h3>
+              <div class="prog">
+                <span style="width: 0" data-width="80%">
+                </span>
+              </div>
+            </div>
+            <div class="skill">
+              <h3>CSS</h3>
+              <div class="prog">
+                <span style="width: 0" data-width="85%">
+                </span>
+              </div>
+            </div>
+            <div class="skill">
+              <h3>JavaScript</h3>
+              <div class="prog">
+                <span style="width: 0" data-width="95%">
+                </span>
+              </div>
+            </div>
+            <div class="skill">
+              <h3>Python</h3>
+              <div class="prog">
+                <span style="width: 0" data-width="70%">
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-four">
+      Section four
+    </section>
+
+    <script>
+      let sectionThree = document.getElementById("section-three");
+      let span = document.querySelectorAll(".prog span");
+      window.addEventListener("scroll",()=>{
+      if(window.scrollY >= sectionThree.offsetTop-200){
+        // console.log("Reached The Sections");
+        span.forEach((span)=>{
+          span.style.width = span.dataset.width;
+        })
+      }
+      });
+
+      let upButton = document.getElementById("up-btn");
+
+      window.addEventListener("scroll",()=>{
+        if(window.scrollY > 30){
+        upButton.style.display = "block"
+      }else{
+        
+        upButton.style.display = "none"
+      }
+      });
+      upButton.onclick = function(){
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0; 
+      }
+    </script>
+  </body>
+</html>
